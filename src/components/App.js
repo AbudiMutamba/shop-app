@@ -4,11 +4,7 @@ import MyRouter from './routes/MyRouter'
 
 function App() {
     
-    return (
-        <div>
-            <MyRouter />
-        </div>
-    )
+    return <MyRouter />
 }
 
 export default App
