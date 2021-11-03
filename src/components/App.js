@@ -1,6 +1,6 @@
-import React from 'react'
-
 import MyRouter from './routes/MyRouter'
+
+import React from 'react'
 
 function App() {
     

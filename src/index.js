@@ -13,9 +13,10 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
 
-    <AuthProvider>
+     <AuthProvider>
       <App />
-    </AuthProvider>
+    </AuthProvider> 
+    {/* <App /> */}
 
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,8 +1,19 @@
 import React from 'react'
 
+import {useAuth} from '../contexts/Auth'
+
+import { Redirect } from 'react-router-dom'
+
 function Home() {
 
-    const items = [
+  //const {currentUser} = useAuth()
+
+    let formatter = new Intl.NumberFormat('en-US',{
+        style: 'currency',
+        currency: 'UGX',
+    });
+
+    const inventoryItems = [
         {
             name: "Blue T-shirt",
             category: "All",
@@ -16,42 +27,67 @@ function Home() {
         {
             name: "Dress",
             category: "Ladies",
-            price: 50000,
+            price: 50000
         },
         {
             name:"Macbook Air",
             category: "Tech",
-            price: 4000000,
+            price: 4000000
         }
     ]
-    return (
-        <div className = "container">
-            <ul>
-            {
-                items.map ((item, index)=> {
+
+    // if (currentUser){
+    //     return(<Redirect to={{ pathname:"/dashboard"}}/>)
+    // }
+     return (
+        
+        <div>
+            <div className="header">
+                <h1>Shop Now</h1>
+                    <div>
+                         <button >Basket</button>
+                     </div>
+            </div>
+
+            <ul className='item-list'>
+             {
+                inventoryItems.map ((inventoryItem, index)=> {
                     return (
-                        <>
-                        <li key = {index.toString()}>
+                       
+                         //<>
+
+                        <li key = {index.toString()} className="item">
+            
                         <div>
-                            <h1> {item.name} </h1>
+                          {inventoryItem.name} 
                         </div>
-                        <div>
-                            {item.category}
+
+                        <div className="category">
+                            {inventoryItem.category}
                         </div>
+
                         <div>
-                            <h4>price: {item.price}</h4>
+                             {formatter.format(inventoryItem.price)}
+                             {/* {Item.price} */}
+                        </div>
+
+                        <div className="cta">
+                                    <button><span>Wishlist</span></button>
+                                    <button><span>Rate</span></button>
+                                    <button><span>Cart</span></button>
+                                    <button><span>Buy Now</span></button>
                         </div>
                         </li>
-                        <button className = "btn">Add to Cart</button>
-                        <button className = "btn">Remove from Cart</button>
-                        <button className = "btn">Buy Now</button>
-                        </>
+
+                        //</>
                     )
                 })
-            }
+             }
             </ul>
         </div>
     )
 }
 
 export default Home
+
+

@@ -9,7 +9,20 @@ body{
     height: 100%;
 }
 
-#root {
+nav{
+display: flex;
+justify-content: space-between;
+background-color: rgba(165, 42, 42, 0.774);
+}
+
+.btn-basket {
+    border: none;
+    cursor: pointer;
+    transition: all .5ms ease-in-out;
+    border: 2px  2px solid #ffff;
+    margin: 10px;
+}
+/* #root {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,12 +30,12 @@ body{
     flex: 1;
     height: 100vh;
     background-color:rgba(100, 83, 10, 0.137);
-}
-
+} */
+/*
 .btn { 
     border: none;
     width: auto;
-    /* height: 40px; */
+     height: 40px; 
     cursor: pointer;
     transition: all .5ms ease-in-out;
     border: 2px  2px solid #ffff;
@@ -32,11 +45,6 @@ body{
 .btn:hover {
     width: auto;
     height: 10px;
-}
-
-
-/* .container li  div { 
-    display: grid;
-    grid-template-columns: auto;
-    
 } */
+
+

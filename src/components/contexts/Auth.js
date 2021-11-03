@@ -1,5 +1,5 @@
-import React, { Children } from 'react'
-
+// import React, { Children } from 'react'
+import React from 'react'
 // import { createContent, useContext, useState} from 'react';
 
 const AuthContext = React.createContext()
@@ -8,7 +8,7 @@ export function useAuth() {
     return React.useContext( AuthContext )
 }
 
-function AuthProvider() {
+function AuthProvider({Children}) {
 
     const [currentUser, SetCurrentUser] = React.useState(null)
     
