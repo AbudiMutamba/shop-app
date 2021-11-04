@@ -12,10 +12,6 @@ import {useAuth} from '../contexts/Auth'
 function PrivateRouter({children, ...rest}) {
     const { currentUser } = useAuth()
 
-    React.useEffect(() => {
-        console.log(currentUser)
-        console.log('Private route')
-    },[])
 
     return (
        
@@ -26,7 +22,7 @@ function PrivateRouter({children, ...rest}) {
                     : (
                         <Redirect
                             to={{
-                                pathname: "/not-authorized",
+                                pathname: "/not-logged-in",
                                 state:{from:location}
                             }}
                         />

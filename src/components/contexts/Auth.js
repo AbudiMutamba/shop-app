@@ -1,18 +1,29 @@
 // import React, { Children } from 'react'
-import React from 'react'
-// import { createContent, useContext, useState} from 'react';
+import { 
+    createContext,
+    useContext, 
+    useState,
+    useEffect
+} from 'react'
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
 
 export function useAuth() {
-    return React.useContext( AuthContext )
+    return useContext( AuthContext )
 }
 
-function AuthProvider({Children}) {
+function AuthProvider({children}) {
 
-    const [currentUser, SetCurrentUser] = React.useState(null)
+    const [currentUser, SetCurrentUser] = useState(null)
     
-    const [loading, setLoading] = React.useState(true)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() =>{
+        const loggedIn = parseInt(localStorage.getItem('loggedIn'))
+        if (loggedIn === 1)
+            SetCurrentUser(loggedIn)
+            // console.log(currentUser)
+    },[])
 
     const value = {
         loading,
@@ -24,7 +35,7 @@ function AuthProvider({Children}) {
     return (
         
        <AuthContext.Provider value={value}>
-           {Children}
+           {children}
        </AuthContext.Provider>
     )
 }

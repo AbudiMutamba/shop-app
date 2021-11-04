@@ -1,50 +1,78 @@
-html,
+
+ html,
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body{
+body {
     height: 100%;
 }
 
-nav{
-display: flex;
-justify-content: space-between;
-background-color: rgba(165, 42, 42, 0.774);
-}
-
-.btn-basket {
-    border: none;
-    cursor: pointer;
-    transition: all .5ms ease-in-out;
-    border: 2px  2px solid #ffff;
-    margin: 10px;
-}
-/* #root {
+#root {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     flex: 1;
     height: 100vh;
-    background-color:rgba(100, 83, 10, 0.137);
-} */
-/*
-.btn { 
-    border: none;
-    width: auto;
-     height: 40px; 
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background: red; */
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: auto 100px; */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: palevioletred;
+}
+.header button {
+    background: purple;
+    color: #fff;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 1.4rem;
+    border: 2px solid purple;
     cursor: pointer;
-    transition: all .5ms ease-in-out;
-    border: 2px  2px solid #ffff;
-    margin: 10px;
+}
+.header button:hover {
+    background: #fff;
+    color: purple;
 }
 
-.btn:hover {
-    width: auto;
-    height: 10px;
-} */
+ul.item-list {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    width: 80%;
+    margin: 30px auto;
+}
 
+li.item {
+    box-shadow: 0 2px 4px #eee;
+    border: 1px solid rgba(238, 238, 238, 0.726);
+    background: #fff;
+    border-radius: 5px;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+}
+li.item .category {
+    text-transform: uppercase;
+    font-size: .6rem;
+    color: rgba(90, 90, 90, 0.50);
+    padding:10px 0;
+}
+
+li.item .cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 10px 0;
+}
 

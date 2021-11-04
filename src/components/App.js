@@ -4,7 +4,9 @@ import React from 'react'
 
 function App() {
     
-    return <MyRouter />
+    return (
+        <MyRouter />
+    )
 }
 
 export default App

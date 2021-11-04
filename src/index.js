@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import './components/css/style.css'; 
+import './components/css/style.css';
 
 import App from './components/App'; 
 
@@ -15,8 +15,8 @@ ReactDOM.render(
 
      <AuthProvider>
       <App />
-    </AuthProvider> 
-    {/* <App /> */}
+    </AuthProvider>
+   
 
   </React.StrictMode>,
   document.getElementById('root')

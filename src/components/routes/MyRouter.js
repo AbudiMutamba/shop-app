@@ -4,6 +4,8 @@ import PrivateRouter from './PrivateRouter'
 
 import PublicRoute from './PublicRoute'
 
+import NotLoggedIn from '../views/NotLoggedIn'
+
 import Login from '../views/Login'
 
 import Account from '../views/Account'
@@ -29,23 +31,27 @@ import {
 } from 'react-router-dom'
 
 function MyRouter() {
-    //const [page, setPage] = React.useState(null)
+   
 
     return (
         <Router>
            
             <Switch>
-                <PublicRoute path="/" exact>
+                <Route path="/" exact>
                     <Home />
-                </PublicRoute>
+                </Route>
 
-                <PublicRoute path="/login" >
+                <Route path="/not-logged-in" >
+                    <NotLoggedIn />
+                </Route>
+                
+                <Route path="/login" >
                     <Login />
-                </PublicRoute>
+                </Route>
 
-                <PublicRoute path="/not-authorized" >
+                <Route path="/not-authorized" >
                     <NotAuthorized />
-                </PublicRoute>
+                </Route>
 
                 <PrivateRouter path= "/dashboard" >
                     <Dashboard />
@@ -55,13 +61,13 @@ function MyRouter() {
                     <Account />
                 </PrivateRouter>
 
-                <PublicRoute path="/cart">
+                <Route path="/cart">
                     <Cart />
-                </PublicRoute>
+                </Route>
 
-                <PublicRoute path="/checkout">
+                <Route path="/checkout">
                     <Checkout />
-                </PublicRoute>
+                </Route>
 
                 <PrivateRouter path="/pay">
                     <Pay />

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import {useEffect, useState} from 'react'
 
 import {
     Route,
@@ -7,27 +7,27 @@ import {
 
 import {useAuth} from '../contexts/Auth'
 
-function PublicRoute({Children, ...rest}) {
+function PublicRoute({children, ...rest}) {
 
-    const {currentUser} = useAuth()
+    const {currentUser, setCurrentUser} = useAuth()
 
+    const [islogin, setLoggedIn] = useState(0)
+
+    useEffect(() => {
+        const isloggedIn = parseInt(localStorage.getItem('loggedIn'))
+        if (isloggedIn === 1){
+            setLoggedIn(isloggedIn)
+            setCurrentUser(1)
+        }
+    })
+
+    if(islogin)
+        return <Redirect to={{pathname:"/dashboard"}} />
 
     return (
-        <Route
-            {...rest}
-            render= {({location}) => currentUser
-                ? (
-                    <Redirect
-                        to={{
-                            pathname: "/dashboard",
-                            state:{from:location}
-                        }}
-                    />
-                )
-              :
-               (Children)
-            }
-        />
+        <Route>
+            {children}
+        </Route>
     )
 }
 
