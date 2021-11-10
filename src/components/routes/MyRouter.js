@@ -1,14 +1,16 @@
-import * as React from 'react'
-
 import PrivateRouter from './PrivateRouter'
 
 import NotLoggedIn from '../views/NotLoggedIn'
 
 import Login from '../views/Login'
 
+import Logout from '../views/Logout'
+
 import Account from '../views/Account'
 
 import Home from '../views/Home'
+
+import Help from '../views/Heip'
 
 import Cart from '../views/Cart'
 
@@ -22,18 +24,55 @@ import NotAuthorized from '../views/NotAuthorized'
 
 import NotFound from '../views/NotFound'
 
+import { useAuth } from '../contexts/Auth'
+
 
 import {
     BrowserRouter as Router,
-    Switch, Route
+    Switch, Route, Link
 } from 'react-router-dom'
+
+import {useCart} from '../contexts/Cart'
 
 function MyRouter() {
    
+    const date = new Date()
+    const {currentUser} = useAuth()
+    const {itemsInCart} = useCart()
 
     return (
         <Router>
-           
+            <header className="header">
+                <h1>
+                    <Link to="/">DevShop</Link>
+                </h1>
+                <nav>
+                    <ul>
+                        {currentUser &&
+                            <>
+                                <li>
+                                    <Link to="/">Shop</Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li>
+                                    <Link to="/account">My Account</Link>
+                                </li>
+                            </>
+                        }
+                            <li>
+                                <Link to="/help">Help</Link>
+                            </li>
+                            <li>
+                                {currentUser ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link>}
+                            </li>
+                            <li>
+                                <Link to="/cart" className="btn basket">{itemsInCart?.length} Basket</Link>
+                             </li>
+                    </ul>
+                </nav>
+            </header>
             <Switch>
                 <Route path="/" exact>
                     <Home />
@@ -49,6 +88,10 @@ function MyRouter() {
                 
                 <Route path="/login" >
                     <Login />
+                </Route>
+
+                <Route path="/help" >
+                    <Help />
                 </Route>
 
                 <Route path="/not-authorized" >
@@ -71,6 +114,10 @@ function MyRouter() {
                     <Checkout />
                 </Route>
 
+                <Route path="/logout">
+                    <Logout />
+                </Route>
+
                 <PrivateRouter path="/pay">
                     <Pay />
                 </PrivateRouter>
@@ -80,6 +127,9 @@ function MyRouter() {
                 </Route>
 
             </Switch>
+            <footer>
+                <p>&copy; Copyright {date.getFullYear() } </p>
+            </footer>
 
         </Router>
     )
