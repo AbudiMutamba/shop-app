@@ -18,15 +18,16 @@ function Login() {
             setCurrentUser(loggedIn)
             setLogin(loggedIn)
         }
-    })
+    },[])
 
     if (isLogin)
         return <Redirect to={{pathname: '/dashboard'}} />
+
     return (
         <div>
             <button onClick={()=> {
              setCurrentUser(1)
-             
+             localStorage.setItem('loggedIn', 1)
              history.push('/dashboard')
                     
             }}

@@ -2,8 +2,6 @@ import * as React from 'react'
 
 import PrivateRouter from './PrivateRouter'
 
-import PublicRoute from './PublicRoute'
-
 import NotLoggedIn from '../views/NotLoggedIn'
 
 import Login from '../views/Login'
@@ -38,6 +36,10 @@ function MyRouter() {
            
             <Switch>
                 <Route path="/" exact>
+                    <Home />
+                </Route>
+
+                <Route path="/home" exact>
                     <Home />
                 </Route>
 
