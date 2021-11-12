@@ -50,6 +50,10 @@ a {
     background: #fff;
     color: purple;
 }
+.header nav ul {
+    display: flex;
+    gap: 10px;
+}
 ul, ol {
     list-style-type: none;
     margin: 0;

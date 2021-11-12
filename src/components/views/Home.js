@@ -4,6 +4,8 @@ import {useCart} from '../contexts/Cart'
 
 import { Link } from 'react-router-dom'
 
+
+
 function Home() { 
 
    const {currentUser} = useAuth() 

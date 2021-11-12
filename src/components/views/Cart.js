@@ -104,7 +104,8 @@ function Cart() {
                         </tr>
                 </tfoot>
             </table>
-           
+           <Link to="/home">Continue Shopping</Link>
+           <Link to="/checkout">Checkout</Link>
         </div>
     )
 
