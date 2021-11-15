@@ -23,17 +23,47 @@ function Checkout() {
 
     const [discount, setDiscount] = useState(0)
 
-    const [voucher, setVoucher] = useState('')
+    const [voucher, setVoucher] = useState({})
 
-    const vouchers = ['10% off', '20% off', '30% off']
+    // const vouchers = [
+    //     {code: 'xxx', percentage: 10, status:'active', amount:10000},
+    //     {code: 'yyy', percentage: 15, status:'expired', amount:10000},
+    //     {code: 'zzz', percentage: 20, status:'active', amount:null},
+    //     {code: 'ddd', percentage: 40, status:'expired', amount:10000},
+    // ]
+    
 
+    const vouchers = {
+        xxx:{rate:10, status:'active', amount:10000},
+        yyy:{rate:20, status:'expired', amount:10000},
+        zzz:{rate:30, status:'active', amount:null},
+        ddd:{rate:40, status:'expired', amount:10000},
+        www:{rate:null, status:'expired', amount:10000},
+        nnn:{rate:null, status:'active', amount:null}
+    }
     const [tax, setTax] = useState(0)
-
-
 
     const handlePayment = () => {
 
     }
+
+    const getVoucherInfo = (appliedVoucher) => {
+        let theVoucher = vouchers[appliedVoucher]
+
+        if(theVoucher) {
+        
+            if(theVoucher['status'] !== 'expired') {
+            if(!theVoucher['rate'] && !theVoucher['amount']) return { msg: 'Invalid Voucher' }
+            return theVoucher['amount'] > 0 ? {amount: theVoucher['amount']} : {rate: theVoucher['rate']}
+            }
+
+            return {msg: 'Expired voucher'};
+
+        } 
+
+        return {msg: 'Invalid voucher'}
+    
+    }    
 
     return (
         <div>
@@ -52,7 +82,7 @@ function Checkout() {
                     <legend>Shipping info</legend>
 
                     <div>
-                        <label>Name <span calss="required-label">*</span></label>
+                        <label>Name <span className="required-label">*</span></label>
                         <input type="text" required placeholder="Name"  />
                     </div>
 
@@ -62,12 +92,12 @@ function Checkout() {
                     </div>
 
                     <div>
-                        <lable>Address line 1 <span class="required-lable">*</span></lable>
+                        <lable>Address line 1 <span className="required-lable">*</span></lable>
                         <input type="text" placeholder="Ex. Suite no. Apt No. Plot No. Rd"  />
                     </div>
 
                     <div>
-                        <lable>Address line 2</lable>
+                        <label>Address line 2</label>
                         <input type="text" placeholder="State, zipcode, town"  />
                     </div>
 
@@ -126,7 +156,15 @@ function Checkout() {
                    <legend>Payment</legend>
                     <div>
                         <p>Voucher Code</p>
-                        <input type="text" placeholder="Voucher code" />
+                        <input type="text" placeholder="Voucher code" onBlur={(event) => {
+                            const voucherInfo = getVoucherInfo(event.target.value)
+                            if(voucherInfo?.msg){
+                                event.target.value = voucherInfo.msg
+                            } else {
+                                
+                                voucherInfo?.amount ? setDiscount(voucherInfo.amount) : setDiscount((voucherInfo.rate / 100) * total)  
+                            }
+                        }}/>
                     </div>
                         <label>MoMo/MobileMoney<input type="radio" name="payment_method" value="momo" /></label>
                         <label>Airtel<input type="radio" value="momo" name="payment_method" /></label>
@@ -139,3 +177,18 @@ function Checkout() {
 }
 
 export default Checkout
+
+
+/**
+ * Apply discounts using vouchers in e-Commerce
+
+1. Generate a bank of vouchers and store them
+2. Retrieve the vouchers
+3. Retrieve voucher from the retrieved vouchers
+    1. Is voucher not found -> Return and show invalid message
+    2. Is voucher found, check it’s value
+        1. Is value Falsy, Return and show invalid message
+4. Get voucher status
+    1. Is active, apply voucher value to generate discount
+    2. Else return expired message
+ */
