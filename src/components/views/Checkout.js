@@ -114,8 +114,8 @@ function Checkout() {
                             </div>
                         
                             <div>
-                                <label>Town/City</label>
-                                <input type="text" placeholder="Town/City" />
+                                <label>Town/Village</label>
+                                <input type="text" placeholder="Town/Village" />
                             </div>
                         </>
 

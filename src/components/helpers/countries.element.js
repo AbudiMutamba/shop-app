@@ -1,8 +1,8 @@
 
-export default function Countries (props) {
+ export default function Countries (props) {
     return (
-        
-<select {...props}>
+
+    <select {...props}>
     <option>- Select Country -</option>
     <option value="Afghanistan">Afghanistan</option>
     <option value="Aland Islands">Aland Islands</option>

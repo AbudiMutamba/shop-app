@@ -14,21 +14,21 @@ export function useAuth() {
 
 function AuthProvider({children}) {
 
-    const [currentUser, SetCurrentUser] = useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
     
     const [loading, setLoading] = useState(true)
 
     useEffect(() =>{
         const loggedIn = parseInt(localStorage.getItem('loggedIn'))
         if (loggedIn === 1)
-            SetCurrentUser(loggedIn)
+            setCurrentUser(loggedIn)
             // console.log(currentUser)
     },[])
 
     const value = {
         loading,
         currentUser,
-        SetCurrentUser,
+        setCurrentUser,
         setLoading
     }
 

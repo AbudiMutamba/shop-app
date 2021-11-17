@@ -1,12 +1,12 @@
 import React from 'react'
 
-//import {useAuth} from '../contexts/Auth'
+import {useAuth} from '../contexts/Auth'
 
-//import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 function Home() {
 
-//   const {currentUser} = useAuth()
+  const {currentUser} = useAuth()
 
     let formatter = new Intl.NumberFormat('en-US',{
         style: 'currency',
