@@ -1,5 +1,4 @@
 const Zones = {
-
     'Zone A':{
         'transport_mode': ['air', 'sea'],
         'shipping_methods' : {
@@ -53,33 +52,39 @@ const Zones = {
                     },
                 ]
             },
+        }
     },
    
 }
 
-const regions = {
-    'asia': {
+const regions = [
+    {
+        'region': 'asia',
         'zone' : 'Zone A',
-        'countries':['china', 'japan','singapore'],
+        countries:['china', 'japan','singapore'],
     }, 
-    'europe':{
+    {
+        'region':'europe',
         'zone': 'Zone A',
-        'countries':['uk', 'france','spain'],
+        countries:['uk', 'france','spain'],
     }, 
-    'north_america':{
+   {
+        'region' : 'north_america',
         'zone': 'Zone A',
-        'countries':['usa', 'canada'],
+        countries : ['usa', 'canada'],
     },
-    'africa':{
+    {
+        'region' : 'africa',
         'zone' : 'Zone B',
-        'countries' : ['uganda', 'south_sudan', 'rwanda'],
+        countries : ['uganda', 'south_sudan', 'rwanda'],
     }, 
-    'middle_east' : {
+    {
+        'region': 'middle_east',
         'zone' : 'Zone B',
-        'countries':['uae'],
+        countries:['united_arab_emirates']
     }
 
-}
+]
 
 const shipping_methods = {
     'International' : {
@@ -95,3 +100,15 @@ const shipping_methods = {
 
     }
 }
+
+// let country =  'uganda'
+// let country  = regions.filter(region => region.countries.includes(country)).map(region => region.zone)
+// let regions_which_contain_country = regions.filter(region => region.countries.includes(country))
+// let zones_of_the_regions = regions_which_contain_country.map(regions_which_contain_country => regions_which_contain_country.zone)
+// console.log(zones_of_the_regions)
+
+//Get zone of the country
+// let [regions_which_contain_country] = regions.filter(region => regions.countries.includes(country))
+// let {zone} = regions_which_contain_country
+// console.log(Zones[zone])
+
