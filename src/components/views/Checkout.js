@@ -8,6 +8,8 @@ import Districts from '../helpers/districts.element'
 
 import USA from '../helpers/us.state.element'
 
+import { getCountryZone } from '../helpers/shipping'
+
 import { currencyFormatter, ugandaShillings } from '../helpers/currency.format'
 //legend is a title of a fliedset
 //fliedset is a group
@@ -23,7 +25,9 @@ function Checkout() {
 
     const [discount, setDiscount] = useState(0)
 
-    const [voucher, setVoucher] = useState({})
+   // const [voucher, setVoucher] = useState({})
+
+    const [zone, setZone] = useState(null)
 
     // const vouchers = [
     //     {code: 'xxx', percentage: 10, status:'active', amount:10000},
@@ -103,7 +107,10 @@ function Checkout() {
 
                     <div>
                         <label>Country</label>
-                        <Countries onChange = {(event) => setCountry(event.target.value)} id="country"/>
+                        <Countries onChange = {(event) =>{
+                             setCountry(event.target.value)
+                             setZone(getCountryZone(event.target.value))
+                        }} required id="country"/>
                     </div>
 
                     { country === 'Uganda' ?
@@ -142,7 +149,40 @@ function Checkout() {
 
                     }
                 </fieldset>
-
+             
+                    {zone.error 
+                      ?
+                      <div>{zone.error}</div>
+                      :
+                       <fieldset>
+                            <legend> Shipping methods</legend>
+                       
+                         {zone.map(theCompany =>
+                            <div>
+                                <h1>{theCompany.company}</h1>
+                            {
+                                theCompany.classes.map((companyClass,index) =>
+                                    <div>
+                                        <input>
+                                            onChange = {(event) => {
+                                            setShipping(0)
+                                            setShipping(Number(event.target.getAttribute('data-cost')))
+                                                    }}
+                                                    id={`${theCompany.ccmpany}_${companyClass.label}`.toLocaleLowerCase().replace('', '_')}
+                                                    type='radio name="shipping_class" value={`${theCompany.company}_${companyClass.label}`} data-cost={companyClass.cost} />
+                                                        <label htmlFor ={
+                                                            `${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace('','_')} > {`${companyClass.label} ${companyClass.cost}`}      
+                                                        </label>
+                                        </input>
+                                    </div>
+                                )
+                            }
+                            </div>
+                            )}
+                      
+                         </fieldset>
+                    }
+            
                 <fieldset>
                     <legend>Cart Details</legend> 
                     <p>Subtotal {total}</p>
