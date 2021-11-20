@@ -129,51 +129,61 @@ function Checkout() {
                         :
 
                         <>
+                            {country == 'Untied States' ?  <div>
+                                    <label>State<span class="required-label">*</span></label>
+                                    <USA id="us_state"/>
+                                </div> 
+                                :
+                                <div>
+                                    <label>State<span class="required-label">*</span></label>
+                                    <USA id="state"/>
+                                </div>
+                                }
+                                <div>
+                                    <label>Town/City</label>
+                                    <input type="text" placeholder="Town/City" />
+                                </div>
 
-                            <div>
-                                <label>State<span class="required-label">*</span></label>
-                                <USA id="us_state"/>
-                            </div>
-
-                            <div>
-                                <label>Town/City</label>
-                                <input type="text" placeholder="Town/City" />
-                            </div>
-
-                            <div>
-                                <label>Zip Code/Postal code</label>
-                                <input type="text" placeholder="Postal Code"/>
-                            </div>
-
+                                <div>
+                                    <label>Zip Code/Postal code</label>
+                                    <input type="text" placeholder="Postal Code"/>
+                                </div>
+                            
                         </>
 
                     }
                 </fieldset>
              
-                    {zone.error 
+                    {zone?.error
                       ?
                       <div>{zone.error}</div>
                       :
                        <fieldset>
                             <legend> Shipping methods</legend>
                        
-                         {zone.map(theCompany =>
+                         {zone && zone.map(theCompany =>
                             <div>
                                 <h1>{theCompany.company}</h1>
                             {
                                 theCompany.classes.map((companyClass,index) =>
-                                    <div>
-                                        <input>
+                                    <div key={`${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace('','_')}>
+                                        <input
                                             onChange = {(event) => {
                                             setShipping(0)
                                             setShipping(Number(event.target.getAttribute('data-cost')))
-                                                    }}
-                                                    id={`${theCompany.ccmpany}_${companyClass.label}`.toLocaleLowerCase().replace('', '_')}
-                                                    type='radio name="shipping_class" value={`${theCompany.company}_${companyClass.label}`} data-cost={companyClass.cost} />
-                                                        <label htmlFor ={
-                                                            `${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace('','_')} > {`${companyClass.label} ${companyClass.cost}`}      
-                                                        </label>
-                                        </input>
+                                         }}
+                                            id={`${theCompany.company}_${companyClass.label}`}
+                                            type='radio' name="shipping_class" 
+                                            value={`${theCompany.company}_${companyClass.label}`}
+                                            data-cost={companyClass.cost}
+                                         />
+
+                                        <label htmlFor={
+                                            `${theCompany.company}_${companyClass.label}`
+                                        } > 
+                                        {`${companyClass.label} ${companyClass.cost}`}      
+                                        </label>
+                                       
                                     </div>
                                 )
                             }

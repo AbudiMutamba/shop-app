@@ -61,22 +61,22 @@ export const Zones = {
     {
         'region':'europe',
         'zone': 'Zone A',
-        countries:['UK', 'France','Spain'],
+        countries:['United Kingdom', 'France','Spain'],
     }, 
    {
         'region' : 'north_america',
         'zone': 'Zone A',
-        countries : ['Usa', 'Canada'],
+        countries : ['Canada', 'Untied States'],
     },
     {
         'region' : 'africa',
         'zone' : 'Zone B',
-        countries : ['Uganda', 'South_Sudan', 'Rwanda'],
+        countries : ['Uganda', 'South Sudan', 'Rwanda'],
     }, 
     {
         'region': 'middle_east',
         'zone' : 'Zone B',
-        countries:['United_Arab_Emirates']
+        countries:['United Arab Emirates']
     }
  ]
 //   const Currencies = [
@@ -101,7 +101,7 @@ export const getCountryZone = (country) => {
    /*  let { zone = null} = regions_which_contain_country */
    let zone = regions_which_contain_country ? regions_which_contain_country.zone : null
    // console.log(zone)
-   return Zones[zone]
+   return zone ? Zones[zone] :  {'error':`sorry we don't ship in that location`}
    //return zone ? Zones[zone] : null
 }
 
