@@ -2,7 +2,7 @@ import {useRef, useState} from 'react'
 import { useCart } from '../contexts/Cart'
 import Countries from '../helpers/countries.element'
 import Districts from '../helpers/districts.element'
-import USA from '../helpers/us.state.element'
+import USstates from '../helpers/us.states.element'
 import {getCountryZone} from '../helpers/shipping'
 import axios from 'axios'
 import {currencyFormatter, ugandaShillings} from '../helpers/currency.format'
@@ -12,7 +12,7 @@ function Checkout() {
     const { total } = useCart()
     const [country, setCountry] = useState('Uganda')
     const [shipping, setShipping] = useState(0)
-    const [tax] = useState(0)
+    const [tax, setTax] = useState(0)
     const [discount, setDiscount] = useState(0)
     const [zone, setZone] = useState(null)
     const [patasenteOption, setPatasenteOption] = useState(null)
@@ -104,7 +104,7 @@ function Checkout() {
                         />
 
                     </div>
-                    {country === 'Uganda' ?
+                    {country == 'Uganda' ?
                         <>
                             <div>
                                 <label>District <span class="required-label">*</span></label>
@@ -117,9 +117,9 @@ function Checkout() {
                         </>
                         :
                         <>
-                            {country === 'United States' ? <div>
+                            {country == 'United States' ? <div>
                                 <label>State <span class="required-label">*</span></label>
-                                <USA id="us_state" />
+                                <USstates id="us_state" />
                             </div> :
                             <div>
                                 <label>State <span class="required-label">*</span></label>
@@ -226,7 +226,7 @@ function Checkout() {
                                             })
                                                 .then(response => response.json())
                                                 .then(data => {
-                                                    if (data.result === 'success') {
+                                                    if (data.result == 'success') {
                                                         setMTNSecretCode(true)
                                                     } else {
                                                         console.log(data)

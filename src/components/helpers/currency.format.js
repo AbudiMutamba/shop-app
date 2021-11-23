@@ -1,4 +1,4 @@
-export const ugandashillings = new Intl.NumberFormat('en-US',{
+export const ugandaShillings = new Intl.NumberFormat('en-US',{
     style: 'currency',
     currency: 'UGX',
 });
